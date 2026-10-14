@@ -49,6 +49,15 @@ variable "os_private_network_name" {
   default     = "private-network"
 }
 
+variable "os_existing_private_network" {
+  description = "Existing network and IPv4 subnet; requires a supporting base release and enabling the commented module argument"
+  type = object({
+    network_name = string
+    subnet_name  = string
+  })
+  default = null
+}
+
 variable "kube_api_external_ip" {
   description = "External floating IP to expose Kubernetes API"
   type        = string

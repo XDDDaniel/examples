@@ -92,6 +92,20 @@ gitops_applications_repo_revision    = "<your repos branch>"
 ```
 
 
+### Reusing a private network
+
+This example retains the `v1.1.2` base-module pin. To enable reuse, first
+select a release containing `os_existing_private_network`, then uncomment
+that argument in the `bws-base` module in [main.tf](./main.tf). Set the
+following in your `terraform.tfvars`:
+
+```hcl
+os_existing_private_network = {
+  network_name = "shared-private-network"
+  subnet_name  = "shared-private-subnet"
+}
+```
+
 ### Init Opentofu
 
 ```shell
@@ -211,6 +225,7 @@ NOTE: Any provisioned persistent volumes in Kubernetes will not be deleted. You 
 | <a name="input_os_application_credential_id"></a> [os\_application\_credential\_id](#input\_os\_application\_credential\_id) | Openstack application credentials ID | `string` | n/a | yes |
 | <a name="input_os_application_credential_secret"></a> [os\_application\_credential\_secret](#input\_os\_application\_credential\_secret) | Openstack application credentials secret | `string` | n/a | yes |
 | <a name="input_os_auth_url"></a> [os\_auth\_url](#input\_os\_auth\_url) | Openstack keystone url | `string` | `"https://dashboard.bws.burda.com:5000"` | no |
+| <a name="input_os_existing_private_network"></a> [os\_existing\_private\_network](#input\_os\_existing\_private\_network) | Existing network and IPv4 subnet; requires a supporting base release and enabling the commented module argument | `object({ network_name = string, subnet_name = string })` | `null` | no |
 | <a name="input_os_private_network_name"></a> [os\_private\_network\_name](#input\_os\_private\_network\_name) | Name of the private network | `string` | `"private-network"` | no |
 | <a name="input_os_public_network_name"></a> [os\_public\_network\_name](#input\_os\_public\_network\_name) | Name of the Openstack public network | `string` | `"Public1"` | no |
 | <a name="input_talos_secrets_file"></a> [talos\_secrets\_file](#input\_talos\_secrets\_file) | Name of the file that contains the Talos secrets generated with `talosctl gen secrets` | `string` | `"secrets.yaml"` | no |

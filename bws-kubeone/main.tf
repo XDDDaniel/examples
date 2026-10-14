@@ -47,6 +47,9 @@ module "bws-base" {
   os_private_network_name          = var.os_private_network_name
   os_token                         = data.openstack_identity_auth_scope_v3.user.token_id
 
+  # Enable only after selecting a base module release supporting this input.
+  # os_existing_private_network = var.os_existing_private_network
+
   kubernetes_version     = var.kubernetes_version
   kube_api_external_ip   = var.kube_api_external_ip
   kube_api_external_port = var.kube_api_external_port
